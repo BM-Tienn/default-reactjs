@@ -1,153 +1,187 @@
-<img width="914" alt="React Boilerplate Meets CRA" src="https://user-images.githubusercontent.com/3495307/80274591-2d5daa00-86e4-11ea-8fba-404f1cdba87e.png" align="center">
-<br />
+# Default ReactJS Project
 
-<div align="center" >Crafted for <strong>highly scalable</strong> & <strong>performant</strong> and <strong>easily maintainable</strong> React.js applications <br /> 
-with a focus on  
-<strong>best DX</strong> and <strong>best practices</strong>.
-</div>
+## 🚀 Quick Start
 
-<br />
+### Installation
 
-<div align="center">
-  <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/actions?query=workflow%3Abuild">
-    <img src="https://github.com/react-boilerplate/react-boilerplate-cra-template/workflows/build/badge.svg" alt="Build Status" />
-  </a>
-  <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/actions?query=workflow%3Atests">
-    <img src="https://github.com/react-boilerplate/react-boilerplate-cra-template/workflows/test/badge.svg" alt="Tests Status" />
-  </a>
-  <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/actions?query=workflow%release">
-    <img src="https://github.com/react-boilerplate/react-boilerplate-cra-template/workflows/release/badge.svg" alt="Release Status" />
-  </a>
-</div>
-
-<div align="center">
-  <a href="https://coveralls.io/github/react-boilerplate/react-boilerplate-cra-template">
-    <img src="https://coveralls.io/repos/github/react-boilerplate/react-boilerplate-cra-template/badge.svg?branch=master" alt="Coverage" />
-  </a>
-  <a href="https://opencollective.com/react-boilerplate">
-    <img src="https://opencollective.com/react-boilerplate/backers/badge.svg" alt="Backers" />
-  </a>
-  <a href="https://opencollective.com/react-boilerplate/">
-    <img src="https://opencollective.com/react-boilerplate/sponsors/badge.svg" alt="Sponsors" />
-  </a>
-</div>
-
-<br />
-
----
-
-The official [Create React App](https://github.com/facebook/create-react-app) template of the `discontinued` [React Boilerplate](https://github.com/react-boilerplate/react-boilerplate)
-
-Start your `create-react-app` projects in seconds with the best, industry-standard tools and practices made ready for you.
-
-**📚 Documentation:** [Gitbook](https://cansahin.gitbook.io/react-boilerplate-cra-template/)
-
-**🎨 Check the example app:** [Demonstrating the features](https://react-boilerplate.github.io/react-boilerplate-cra-template/)
-
-**📂 Browse in VS Code:** [![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/react-boilerplate/react-boilerplate-cra-template)
-
-**📦 Package:** [npm](https://www.npmjs.com/package/cra-template-rb)
-
-![version](https://img.shields.io/npm/v/cra-template-rb)
-![version](https://img.shields.io/npm/dm/cra-template-rb)
-
----
-
-## Install & Start
-
-⚠️ Using [Yarn Package Manager](https://yarnpkg.com) is recommended over `npm`.
-
-Create React App with the template
-
-```shell
-yarn create react-app --template cra-template-rb my-app
+```bash
+npm install
 ```
 
-Start and check our example app, if you want
+### Development
 
-```shell
-cd my-app
-yarn start
+```bash
+npm start              # Start development server with Vite
+npm run debug          # Start with HMR debugging
 ```
 
-Remove the example app to start your project!
+### Building
 
-```shell
-yarn cleanAndSetup
+```bash
+npm run build          # Build for production
+npm run build-profile  # Build with profiling enabled
+npm run start:prod     # Build and serve production bundle
+```
+
+### Testing & Preview
+
+```bash
+npm test               # Preview the built application
+npm run test:generators # Test code generators
 ```
 
 ---
 
-## Features
+## 📜 Available Scripts
 
-> This project is **NOT** a framework, UI component library or a design system. The only purpose of this template is to assist you starting your CRA app with a solid tool stack and development patterns. It's 100% customizable. After you start your journey and once you understand the concepts offered here you should personalize your code accordingly instead of being tied to the starter project.
->
-> You can add or remove literally anything and use whichever library or tools you prefer.
+### 🔧 Development Scripts
 
-<dl>
+| Script       | Command              | Description                          |
+| ------------ | -------------------- | ------------------------------------ |
+| `start`      | `npm start`          | Start development server with Vite   |
+| `debug`      | `npm run debug`      | Start development with HMR debugging |
+| `test`       | `npm test`           | Preview the built application        |
+| `start:prod` | `npm run start:prod` | Build and serve production bundle    |
 
-  <dt>Predictable state management</dt>
-  <dd>Unidirectional data flow allows for change logging and time travel debugging.</dd>
+### 🏗️ Build Scripts
 
-  <dt>Instant feedback</dt>
-  <dd>Enjoy the best DX (Developer eXperience) and code your app at the speed of thought! Your saved changes to the CSS and JS are reflected instantaneously without refreshing the page. Preserve application state even when you update something in the underlying code!</dd>
+| Script                   | Command                          | Description                                      |
+| ------------------------ | -------------------------------- | ------------------------------------------------ |
+| `build`                  | `npm run build`                  | Build for production with TypeScript compilation |
+| `build-profile`          | `npm run build-profile`          | Build with bundle analyzer profiling             |
+| `prebuild`               | Automatic                        | Generate build version before building           |
+| `generate-build-version` | `npm run generate-build-version` | Generate build version file                      |
 
-  <dt>Next generation CSS</dt>
-  <dd>Write composable CSS that's co-located with your components for complete modularity. Unique generated class names keep the specificity low while eliminating style clashes. Ship only the styles that are on the page for the best performance.</dd>
+### 🧪 Testing & Quality Scripts
 
-  <dt>Industry-standard routing</dt>
-  <dd>It's natural to want to add pages (e.g. `/about`) to your application, and routing makes this possible.</dd>
+| Script            | Command                   | Description                            |
+| ----------------- | ------------------------- | -------------------------------------- |
+| `test:generators` | `npm run test:generators` | Test the code generators               |
+| `checkTs`         | `npm run checkTs`         | Type check TypeScript without emitting |
 
-  <dt>Industry-standard i18n internationalization support</dt>
-  <dd>Scalable apps need to support multiple languages, easily add and support multiple languages.</dd>
+### 🔍 Linting & Code Quality
 
-  <dt>Typescript</dt>
-  <dd>Typescript is the key to scalability. Build self-documented code, easy-to-debug code and create maintainable large applications and codebases with a highly productive development experience.</dd>
+| Script     | Command            | Description                   |
+| ---------- | ------------------ | ----------------------------- |
+| `lint`     | `npm run lint`     | Lint source code with ESLint  |
+| `lint:fix` | `npm run lint:fix` | Lint and auto-fix source code |
+| `lint:css` | `npm run lint:css` | Lint CSS files with Stylelint |
+| `eslint`   | `npm run eslint`   | Base ESLint command           |
+| `prettify` | `npm run prettify` | Format code with Prettier     |
 
-  <dt>Quick scaffolding</dt>
-  <dd>Create components, containers, routes, selectors and sagas - and their tests - right from the CLI!</dd>
+### ⚙️ Code Generation
 
-  <dt>Static code analysis</dt>
-  <dd>Focus on writing new features without worrying about formatting or code quality. With the right editor setup, your code will automatically be formatted and linted as you work.</dd>
+| Script     | Command            | Description                                      |
+| ---------- | ------------------ | ------------------------------------------------ |
+| `generate` | `npm run generate` | Generate components, containers, etc. using Plop |
 
-  <dt>SEO</dt>
-  <dd>We support SEO (document head tags management) for search engines that support indexing of JavaScript content. (eg. Google)</dd>
-</dl>
+### 📦 Release & Version Management
 
-But wait... there's more!
+| Script        | Command             | Description                                |
+| ------------- | ------------------- | ------------------------------------------ |
+| `release`     | `npm run release`   | Create a new release with standard-version |
+| `preversion`  | Automatic           | Run checks before version bump             |
+| `version`     | Automatic           | Generate build version and stage files     |
+| `postversion` | Automatic           | Push changes and tags to repository        |
+| `changelog`   | `npm run changelog` | Generate changelog                         |
 
-- _The best test setup:_ Automatically guarantee code quality and non-breaking
-  changes. (Seen a react app with 100% test coverage before?)
-- _The fastest fonts:_ Say goodbye to vacant text.
-- _Stay fast_: Profile your app's performance from the comfort of your command
-  line!
+---
 
-<sub><i>Keywords: Create React App, React Boilerplate, Custom Template, Typescript, React.js, Redux, Hot Reloading, ESNext, Babel, react-router, `styled-components`, redux-saga, FontFaceObserver</i></sub>
+## 🐳 Docker Deployment
 
-## Contributors
+### Build Docker Image
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/Can-Sahin"><img src="https://avatars2.githubusercontent.com/u/33245689?s=80" width="80px;" alt=""/><br /><sub><b>Can Sahin</b></sub></a><br /><a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=Can-Sahin" title="Code">💻</a> <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=Can-Sahin" title="Documentation">📖</a> <a href="#ideas-Can-Sahin" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/pulls?q=is%3Apr+reviewed-by%3ACan-Sahin" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=Can-Sahin" title="Tests">⚠️</a></td>
-    <td align="center"><a href="https://github.com/receptiryaki"><img src="https://avatars0.githubusercontent.com/u/3495307?s=80" width="80px;" alt=""/><br /><sub><b>Recep Tiryaki</b></sub></a><br /><a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=receptiryaki" title="Code">💻</a> <a href="#ideas-receptiryaki" title="Ideas, Planning, & Feedback">🤔</a> <a href="#design-receptiryaki" title="Design">🎨</a></td>
-    <td align="center"><a href="https://github.com/mogsdad"><img src="https://avatars3.githubusercontent.com/u/1707731?s=80" width="80px;" alt=""/><br /><sub><b>David Bingham</b></sub></a><br /><a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=mogsdad" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/lourensdev"><img src="https://avatars.githubusercontent.com/u/5746141?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Lourens de Villiers</b></sub></a><br /><a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=lourensdev" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/rejochandran"><img src="https://avatars.githubusercontent.com/u/4696985?s=80" width="80px;" alt=""/><br /><sub><b>Rejo Chandran</b></sub></a><br /><a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=rejochandran" title="Code">💻</a> <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=rejochandran" title="Documentation">📖</a> <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=rejochandran" title="Tests">⚠️</a></td>
-    <td align="center"><a href="https://github.com/qeleb"><img src="https://avatars.githubusercontent.com/u/15345696?s=80" width="80px;" alt=""/><br /><sub><b>Caleb Hoff</b></sub></a><br /><a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=qeleb" title="Code">💻</a> <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=qeleb" title="Documentation">📖</a> <a href="#ideas-qeleb" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/commits?author=qeleb" title="Tests">⚠️</a></td>
-  </tr>
-</table>
+```bash
+docker build -t react-app .
+```
 
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
+### Run Container
 
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+```bash
+docker run -it -p 80:80 -d --name react-app react-app
+```
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+---
 
-## License
+## 🛠️ Tech Stack
 
-This project is licensed under the MIT license, Copyright (c) 2019 Maximilian Stoiber.
+### Core Technologies
+
+- **TypeScript** - Type-safe development
+- **React 18.2.0** - Component-based UI framework
+- **Redux Toolkit** - Modern Redux state management
+- **Redux Saga** - Side effect management
+- **Vite** - Fast build tool and development server
+
+### Styling & UI
+
+- **Styled Components** - CSS-in-JS styling
+- **Ant Design** - React UI library
+- **Tailwind CSS** - Utility-first CSS framework
+- **Sanitize.css** - CSS reset
+
+### Development Tools
+
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **Husky** - Git hooks
+- **Plop** - Code generator
+- **TypeScript** - Static type checking
+
+### Testing & Quality
+
+- **Jest** - Testing framework
+- **React Testing Library** - Component testing utilities
+- **Stylelint** - CSS linting
+
+### Additional Features
+
+- **React Router** - Client-side routing
+- **React i18next** - Internationalization
+- **React Helmet** - Document head management
+- **Axios** - HTTP client
+- **React Dropzone** - File upload
+- **FontFaceObserver** - Web font loading
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── app/                 # Redux store configuration
+├── components/          # Reusable components
+├── containers/          # Connected components
+├── types/              # TypeScript type definitions
+├── utils/              # Utility functions
+├── locales/            # Internationalization files
+└── styles/             # Global styles
+```
+
+---
+
+## 🔧 Code Generation
+
+Generate new components, containers, or other code structures:
+
+```bash
+npm run generate
+```
+
+This will start an interactive CLI to help you create:
+
+- React components
+- Redux containers
+- Saga files
+- And more...
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT license.
 For more information see `LICENSE.md`.
+
+---
+
+<sub><i>Keywords: TypeScript, React.js, Redux, Vite, Hot Reloading, ESNext, Babel, react-router, ServiceWorker, styled-components, redux-saga, Docker, Nginx, Ant Design, Tailwind CSS</i></sub>

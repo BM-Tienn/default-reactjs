@@ -1,59 +1,95 @@
 import axios, {
-  AxiosRequestConfig,
-  AxiosError,
   AxiosResponse,
+  AxiosError,
   AxiosInstance,
   AxiosPromise,
+  AxiosRequestConfig,
 } from 'axios';
-import qs from 'qs';
-import { objectType } from './types/const';
-import { globalActions } from 'app/slice';
+import Qs from 'qs';
+import { TYPE_COOKIE } from './constants';
+import { objectType } from 'types';
+import { getCookie } from './cookies';
+import { notify } from 'reapop';
+import { tricklingProgress } from './progressRouter';
 import { store } from 'store/configureStore';
+
 const onSuccessInterceptorRequest = async (config: AxiosRequestConfig) => {
+  if (config.method !== 'GET') tricklingProgress.start();
+  const token = await getCookie(TYPE_COOKIE.TOKEN);
+  if (token) config.headers['Authorization'] = `Bearer ${token}`;
   config.paramsSerializer = (params: any) =>
-    qs.stringify(params, {
+    Qs.stringify(params, {
       arrayFormat: 'brackets',
     });
-
   return config;
 };
 const onErrorInterceptorRequest = (error: AxiosError) => Promise.reject(error);
-const onErrorInterceptorResponse = (error: AxiosError<objectType>) => {
-  if (error.response && error.response.status) {
-    // openNotificationWithIcon(
-    //   'error',
-    //   error.response?.data?.errors?.message
-    //     ? error.response?.data?.errors?.key
-    //     : 'error',
-    //   error.response?.data?.errors?.message
-    //     ? error.response?.data?.errors?.message
-    //     : '',
-    // );
 
-    if (error.response.status === 401) {
-      store.dispatch(globalActions.clearData());
+let notif;
+
+const onErrorInterceptorResponse = (error: AxiosError) => {
+  if (error.response && error.response.status) {
+    if (
+      error.response.status === 401 &&
+      !error.response.config?.url?.includes('logout')
+    ) {
+      store.dispatch(
+        notify(error.response.statusText, 'error', {
+          message: 'Need permission. Please login.',
+          title: 'Oops',
+          dismissAfter: 5000,
+        }),
+      );
+      // store.dispatch(LOGOUT());
+    } else {
+      const message =
+        typeof error.response?.data === 'string'
+          ? error.response?.data
+          : typeof error.response?.data?.msg === 'string'
+          ? error.response?.data.msg
+          : typeof error.response?.data?.errors === 'string'
+          ? error.response?.data?.errors
+          : typeof error.response?.data?.errors?.msg === 'string'
+          ? error.response?.data?.errors?.msg
+          : error.response?.data?.errors.length
+          ? error.response?.data?.errors[0]?.msg
+          : '';
+      store.dispatch(
+        notify('error', {
+          message,
+          title: 'Oops',
+          dismissAfter: 5000,
+        }),
+      );
     }
   }
+  tricklingProgress.done();
   return Promise.reject(error);
 };
 const onSuccessInterceptorResponse = (response: AxiosResponse) => {
-  // if (
-  //   response.status === 200 &&
-  //   response.config.method !== 'get' &&
-  //   !response.config.url?.includes('auth') &&
-  //   !response.config.url?.includes('notification') &&
-  //   !response.config.url?.includes('react') &&
-  //   !response.config.url?.includes('checkout/create-cart')
-  // ) {
-  // }
+  if (
+    response.status === 200 &&
+    response.config.method !== 'get' &&
+    !response.config.url?.includes('auth')
+  ) {
+    if (!notif) {
+      // notif = store.dispatch(
+      //   notify('The changes has been saved.', 'success', {
+      //     title: 'Success',
+      //     dismissAfter: 2000,
+      //   }),
+      // );
+
+      setTimeout(() => {
+        notif = null;
+      }, 2000);
+    }
+  }
+  tricklingProgress.done();
   return response;
 };
-axios.defaults.headers.post['Content-Type'] =
-  'application/x-www-form-urlencoded';
-axios.defaults.headers.put['Content-Type'] =
-  'application/x-www-form-urlencoded';
-axios.defaults.headers.post.Accept = 'application/x-www-form-urlencoded';
-axios.defaults.headers.put.Accept = 'application/x-www-form-urlencoded';
+
+axios.defaults.headers.post['Accept'] = 'application/json';
 
 const _axios: AxiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL || '',
@@ -110,6 +146,10 @@ class AxiosXHRConstructor {
     return this.axiosInstance.put(url, data, config);
   }
   public $delete(url: string, data?: objectType): AxiosPromise {
+    // return this.axiosInstance.delete(url, {
+    //   data,
+    // });
+
     /**
      * @hotfix {https://github.com/axios/axios/issues/3220}
      */
@@ -120,6 +160,7 @@ class AxiosXHRConstructor {
     });
   }
 }
+
 export const BaseXHR = new AxiosXHRConstructor(_axios);
 
 export default _axios;

@@ -10,7 +10,6 @@ module.exports = {
   plugins: ['prettier'],
   rules: {
     'prettier/prettier': ['error', prettierOptions],
-    globals: 0,
   },
   overrides: [
     {

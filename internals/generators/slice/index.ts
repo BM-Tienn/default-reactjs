@@ -48,16 +48,16 @@ export const sliceGenerator: PlopGeneratorConfig = {
   actions: data => {
     const answers = data as Answers;
 
-    const slicePath = `${baseGeneratorPath}/${answers.path}/slice`;
+    const slicePath = `${baseGeneratorPath}/${answers.path}/${answers.sliceName}`;
 
-    if (pathExists(slicePath)) {
-      throw new Error(`Slice '${answers.sliceName}' already exists`);
+    if (!pathExists(slicePath)) {
+      throw new Error(`Slice '${answers.sliceName}' doesn't exists`);
     }
     const actions: Actions = [];
 
     actions.push({
       type: 'add',
-      path: `${slicePath}/index.ts`,
+      path: `${slicePath}/slice.ts`,
       templateFile: './slice/index.ts.hbs',
       abortOnFail: true,
     });
@@ -94,12 +94,26 @@ export const sliceGenerator: PlopGeneratorConfig = {
         templateFile: './slice/saga.ts.hbs',
         abortOnFail: true,
       });
+      actions.push({
+        type: 'modify',
+        path: `${slicePath}/index.tsx`,
+        pattern: new RegExp(/.*\/\/.*\[INSERT HOOK SAGA\].+\n/),
+        templateFile: './slice/appendHookSaga.hbs',
+        abortOnFail: true,
+      });
+      actions.push({
+        type: 'modify',
+        path: `${slicePath}/index.tsx`,
+        pattern: new RegExp(/.*\/\/.*\[INSERT IMPORT SAGA\].+\n/),
+        templateFile: './slice/appendImportSaga.hbs',
+        abortOnFail: true,
+      });
     }
 
-    actions.push({
-      type: 'prettify',
-      data: { path: `${slicePath}/**` },
-    });
+    // actions.push({
+    //   type: 'prettify',
+    //   data: { path: `${slicePath}/**` },
+    // });
 
     return actions;
   },

@@ -17,7 +17,7 @@ export const enum ComponentProptNames {
   wantStyledComponents = 'wantStyledComponents',
   wantTranslations = 'wantTranslations',
   wantLoadable = 'wantLoadable',
-  wantTests = 'wantTests',
+  wantSaga = 'wantSaga',
 }
 
 type Answers = { [P in ComponentProptNames]: string };
@@ -50,22 +50,15 @@ export const componentGenerator: PlopGeneratorConfig = {
     },
     {
       type: 'confirm',
-      name: ComponentProptNames.wantTranslations,
-      default: false,
-      message:
-        'Do you want i18n translations (i.e. will this component use text)?',
-    },
-    {
-      type: 'confirm',
       name: ComponentProptNames.wantLoadable,
       default: false,
       message: 'Do you want to load the component asynchronously?',
     },
     {
       type: 'confirm',
-      name: ComponentProptNames.wantTests,
+      name: ComponentProptNames.wantSaga,
       default: false,
-      message: 'Do you want to have tests?',
+      message: 'Do you want to add saga import signal?',
     },
   ],
   actions: data => {
@@ -86,6 +79,15 @@ export const componentGenerator: PlopGeneratorConfig = {
       },
     ];
 
+    if (answers.wantStyledComponents) {
+      actions.push({
+        type: 'add',
+        path: `${componentPath}/styled.ts`,
+        templateFile: './component/styled.ts.hbs',
+        abortOnFail: true,
+      });
+    }
+
     if (answers.wantLoadable) {
       actions.push({
         type: 'add',
@@ -95,28 +97,10 @@ export const componentGenerator: PlopGeneratorConfig = {
       });
     }
 
-    if (answers.wantTests) {
-      actions.push({
-        type: 'add',
-        path: `${componentPath}/__tests__/index.test.tsx`,
-        templateFile: './component/index.test.tsx.hbs',
-        abortOnFail: true,
-      });
-    }
-
-    if (answers.wantTranslations) {
-      actions.push({
-        type: 'add',
-        path: `${componentPath}/messages.ts`,
-        templateFile: './component/messages.ts.hbs',
-        abortOnFail: true,
-      });
-    }
-
-    actions.push({
-      type: 'prettify',
-      data: { path: `${actualComponentPath}/**` },
-    });
+    // actions.push({
+    //   type: 'prettify',
+    //   data: { path: `${actualComponentPath}/**` },
+    // });
 
     return actions;
   },

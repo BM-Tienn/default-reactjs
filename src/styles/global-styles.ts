@@ -1,51 +1,87 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, css } from 'styled-components/macro';
 
-export const GlobalStyle = createGlobalStyle`
-  html,
-  body {
-    height: 100%;
-    width: 100%;
-    font-size: 14px;
-  }
-
- *{ 
-  font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  }
-
-/* width */
-.ant-table-body::-webkit-scrollbar,
-::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
-}
-
-/* Track */
-.ant-table-body::-webkit-scrollbar-track,
-::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 5px;
-}
-
-/* Handle */
-.ant-table-body::-webkit-scrollbar-thumb ,
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 5px;
-}
-
-/* Handle on hover */
-.ant-table-body::-webkit-scrollbar-thumb:hover,
-::-webkit-scrollbar-thumb:hover {
-  background: #888;
-}
-
-.ant-table-body {
-  scrollbar-width: auto;
-  scrollbar-color: auto;
-}
-
-
-
+export const Flex = css`
+  display: flex;
 `;
+
+export const FlexCol = css`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const FlexRowCenter = css`
+  ${Flex};
+  justify-content: center;
+  align-items: center;
+`;
+
+export const FlexRowStart = css`
+  ${Flex};
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+export const FlexRowEnd = css`
+  ${Flex};
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+export const FlexRowBetween = css`
+  ${Flex}
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const FlexRowAround = css`
+  ${Flex}
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export const FlexColCenter = css`
+  ${FlexCol};
+  ${FlexRowCenter}
+`;
+
+export const FlexColStart = css`
+  ${FlexCol};
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
+
+export const FlexColEnd = css`
+  ${FlexCol};
+  justify-content: flex-end;
+  align-items: flex-end;
+`;
+
+export const FlexColBetween = css`
+  ${FlexCol};
+  justify-content: space-between;
+  align-items: baseline;
+`;
+
+export const BackgroundCover = css<{ bgUrl: string | null | undefined }>`
+  background-image: url(${props => props.bgUrl && props.bgUrl});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+`;
+
+export const BackgroundContain = css`
+  ${BackgroundCover};
+  background-size: contain;
+`;
+
+export const LoadingWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  ${FlexRowCenter};
+`;
+
+export const GlobalStyle = createGlobalStyle`${css`
+  body {
+    background-color: var(--color-dark);
+  }
+`}`;

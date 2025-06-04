@@ -5,6 +5,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
 import { InjectedReducersType } from 'utils/types/injector-typings';
+import { reducer as notificationsReducer } from 'reapop';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -15,6 +16,7 @@ export function createReducer(injectedReducers: InjectedReducersType = {}) {
     return state => state;
   } else {
     return combineReducers({
+      notifications: notificationsReducer(),
       ...injectedReducers,
     });
   }
